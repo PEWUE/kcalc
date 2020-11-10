@@ -1,0 +1,77 @@
+.Header {
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #8e8e8e;
+  box-shadow: 0 5px 6px rgba(0,0,0,.4);
+
+  &-logo {
+    font-family: "Luckiest Guy", sans-serif;
+    font-size: 2rem;
+    padding: 2.5rem 2rem 2rem;
+    color: #DC143C;
+
+    span {
+      color: #FFD700;
+    }
+  }
+
+  &-nav-list {
+    display: none;
+  }
+
+  &-nav-item {
+    color: black;
+    padding: .5rem;
+  }
+
+  .hidden_checkbox {
+    display: none;
+    position: absolute;
+    opacity: 0;
+
+    &:checked {
+      ~ .Header-nav-list {
+        display: block;
+        position: absolute;
+        right: 1rem;
+      }
+
+      ~ .checkbox_toggle {
+        span {
+          &:nth-child(1) {
+            transform: rotate(45deg) translate(2px, 5px);
+          }
+
+          &:nth-child(2) {
+            opacity: 0;
+          }
+
+          &:nth-child(3) {
+            transform: rotate(-45deg) translate(2px, -5px);
+          }
+        }
+      }
+    }
+  }
+
+  .checkbox_toggle {
+    display: block;
+    padding: 2rem;
+
+    span {
+      width: 20px;
+      height: 2px;
+      display: block;
+      margin-bottom: 3px;
+      background-color: white;
+      transition: .3s all ease-in-out;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
