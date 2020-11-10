@@ -1,0 +1,56 @@
+.ingredients {
+  text-align: center;
+  font-family: "Lato", sans-serif;
+
+  .ingredients-header {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .add-ingredient {
+      background-color: green;
+      border: 0;
+      border-radius: 30px;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      box-shadow: 0 5px 6px rgba(0,0,0,.4);
+    }
+  }
+
+  .ingredient-list {
+
+    .ingredient-name {
+      min-width: 70%;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+
+      &:nth-child(1) {
+        margin-top: 1rem;
+      }
+
+      &:last-child {
+        margin-bottom: 1rem;
+      }
+
+      .ingredient-info {
+        margin: .1rem auto;
+      }
+
+      .fa {
+        margin: .5rem .3rem 0;
+        font-size: 1.3rem;
+        color: #FFD700;
+      }
+
+      .fa-trash {
+        color: #DC143C;
+      }
+    }
+  }
+}
