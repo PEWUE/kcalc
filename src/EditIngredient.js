@@ -2,138 +2,123 @@ import React, {useState} from 'react';
 import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
 import {db} from "./firebase";
 import {toast} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 
-toast.configure();
+const EditIngredient = ({ingredient, onEditIngredient}) => {
 
-
-const AddNewIngredient = ({onAddIngredient}) => {
-
-    const [name, setName] = useState("");
-    const [kcal, setKcal] = useState("");
-    const [fat, setFat] = useState("");
-    const [carbs, setCarbs] = useState("");
-    const [protein, setProtein] = useState("");
-
+    const [name, setName] = useState(ingredient.name);
+    const [kcal, setKcal] = useState(ingredient.kcal);
+    const [fat, setFat] = useState(ingredient.fat);
+    const [carbs, setCarbs] = useState(ingredient.carbs);
+    const [protein, setProtein] = useState(ingredient.protein);
 
     const handleSubmit = e => {
         e.preventDefault();
 
+        const data = {
+            id: ingredient.id,
+            name,
+            kcal,
+            fat,
+            carbs,
+            protein
+        }
+
         db.collection("ingredients")
-            .add({
-                name,
-                kcal,
-                fat,
-                carbs,
-                protein
-            })
-            .then(data => {
-                onAddIngredient({
-                    name,
-                    kcal,
-                    fat,
-                    carbs,
-                    protein,
-                    id: data.id
-                })
-                toast.success("Zapisano składnik", {autoClose: 2500});
+            .doc(ingredient.id)
+            .set(data)
+            .then(() => {
+                onEditIngredient(data);
+                toast.warn("Zapisano zmiany", {autoClose: 2500});
             })
             .catch(error => {
-                console.log("Error adding document: ", error);
+                console.log("Error editing document", error);
             })
-
     }
 
-
     return (
-        <section className="new-ingredient-section">
+        <section className="edit-ingredient-section">
             <Form onSubmit={handleSubmit}>
                 <FormGroup className="row-label-input" row>
-                    <Label className="new-ingredient-label"
+                    <Label className="edit-ingredient-label"
                            for="name"
                            xs={{size: 5, offset: 1}}>
                         Nazwa składnika:
                     </Label>
                     <Col xs={{size: 5, offset: 1}}>
-                        <Input className="new-ingredient-input"
+                        <Input className="edit-ingredient-input"
                                value={name}
                                type="text"
                                name="name"
                                id="name"
-                               onChange={e => setName(e.target.value)}
-                               placeholder="np. Ser gouda"/>
+                               onChange={e => setName(e.target.value)}/>
                     </Col>
                 </FormGroup>
                 <FormGroup className="row-label-input" row>
-                    <Label className="new-ingredient-label"
+                    <Label className="edit-ingredient-label"
                            for="kcal"
                            xs={{size: 5, offset: 1}}>
                         Wartość energetyczna:
                     </Label>
                     <Col xs={{size: 5, offset: 1}}>
-                        <Input className="new-ingredient-input"
+                        <Input className="edit-ingredient-input"
                                value={kcal}
                                type="number"
                                name="kcal"
                                id="kcal"
-                               onChange={e => setKcal(e.target.value)}
-                               placeholder="np. 250 [kcal]"/>
+                               onChange={e => setKcal(parseInt(e.target.value))}/>
                     </Col>
                 </FormGroup>
                 <FormGroup className="row-label-input" row>
-                    <Label className="new-ingredient-label"
+                    <Label className="edit-ingredient-label"
                            for="fat"
                            xs={{size: 5, offset: 1}}>
                         Ilość tłuszczów:
                     </Label>
                     <Col xs={{size: 5, offset: 1}}>
-                        <Input className="new-ingredient-input"
+                        <Input className="edit-ingredient-input"
                                value={fat}
                                type="number"
                                name="fat"
                                id="fat"
-                               onChange={e => setFat(e.target.value)}
-                               placeholder="np. 16.3 [g]"/>
+                               onChange={e => setFat(parseInt(e.target.value))}/>
                     </Col>
                 </FormGroup>
                 <FormGroup className="row-label-input" row>
-                    <Label className="new-ingredient-label"
+                    <Label className="edit-ingredient-label"
                            for="carbs"
                            xs={{size: 5, offset: 1}}>
                         Ilość węglowodanów:
                     </Label>
                     <Col xs={{size: 5, offset: 1}}>
-                        <Input className="new-ingredient-input"
+                        <Input className="edit-ingredient-input"
                                value={carbs}
                                type="number"
                                name="carbs"
                                id="carbs"
-                               onChange={e => setCarbs(e.target.value)}
-                               placeholder="np. 2 [g]"/>
+                               onChange={e => setCarbs(parseInt(e.target.value))}/>
                     </Col>
                 </FormGroup>
                 <FormGroup className="row-label-input" row>
-                    <Label className="new-ingredient-label"
+                    <Label className="edit-ingredient-label"
                            for="protein"
                            xs={{size: 5, offset: 1}}>
                         Ilość białek:
                     </Label>
                     <Col xs={{size: 5, offset: 1}}>
-                        <Input className="new-ingredient-input"
+                        <Input className="edit-ingredient-input"
                                value={protein}
                                type="number"
                                name="protein"
                                id="protein"
-                               onChange={e => setProtein(e.target.value)}
-                               placeholder="np. 5.5 [g]"/>
+                               onChange={e => setProtein(parseInt(e.target.value))}/>
                     </Col>
                 </FormGroup>
                 <Col xs={{offset: 7}}>
-                    <Button className="add-button" color="success">Dodaj składnik</Button>
+                    <Button className="save-button" color="warning">Zapisz</Button>
                 </Col>
             </Form>
         </section>
     );
 };
 
-export default AddNewIngredient;
+export default EditIngredient;

@@ -1,0 +1,25 @@
+.edit-ingredient-section {
+
+  .row-label-input {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+
+    .edit-ingredient-label {
+      text-align: center;
+      font-size: 1rem;
+      border: 1px solid #000;
+      border-radius: 15px;
+      box-shadow: 0 5px 6px rgba(0,0,0,.4);
+    }
+
+    .edit-ingredient-input {
+      box-shadow: 0 5px 6px rgba(0,0,0,.4);
+    }
+  }
+
+  .save-button {
+    margin: 1rem 0;
+    box-shadow: 0 5px 6px rgba(0,0,0,.4);
+  }
+}

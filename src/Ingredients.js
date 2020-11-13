@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {db} from "./firebase";
-import {Button, Badge, ListGroup, ListGroupItem, Alert} from "reactstrap";
+import {Button, ListGroup, Alert} from "reactstrap";
 import AddNewIngredient from "./AddNewIngredient";
+import Ingredient from "./Ingredient";
+import {toast} from "react-toastify";
 
 const Ingredients = () => {
     const [ingredients, setIngredients] = useState(false);
@@ -24,6 +26,7 @@ const Ingredients = () => {
 
     const handleAdd = newIngredient => {
         setIngredients(prevState => [...prevState, newIngredient]);
+        setAddButtonToggle(false);
     }
 
     const handleDelete = id => {
@@ -31,10 +34,22 @@ const Ingredients = () => {
             .delete()
             .then(() => {
                 setIngredients(prevState => prevState.filter(ingredient => ingredient.id !== id));
+                toast.error("Usunięto składnik", {autoClose: 2500});
             })
             .catch(error => {
                 console.log("Error removing document:", error);
             })
+    }
+
+    const handleEdit = editedIngredient => {
+        setIngredients(prevState => {
+            return prevState.map(prevIngredient => {
+                if(prevIngredient.id === editedIngredient.id) {
+                    return editedIngredient;
+                }
+                return prevIngredient;
+            })
+        })
     }
 
 
@@ -53,21 +68,7 @@ const Ingredients = () => {
             </div>
             {addButtonToggle && <AddNewIngredient onAddIngredient={handleAdd}/>}
             <ListGroup className="ingredient-list">
-                {ingredients.map(el => {
-                    return (
-                        <ListGroupItem className="ingredient-card" key={el.id}>
-                            <p className="ingredient-name">{el.name}</p>
-                            <Badge className="ingredient-info" pill>Tłuszcz: {el.fat}g</Badge>
-                            <Badge className="ingredient-info" pill>Węglowodany: {el.carbs}g</Badge>
-                            <Badge className="ingredient-info" pill>Białko: {el.protein}g</Badge>
-                            <Badge className="ingredient-info" pill>Kcal: {el.kcal}kcal</Badge>
-                            <div>
-                                <i className="fa fa-edit"></i>
-                                <i className="fa fa-trash" onClick={() => handleDelete(el.id)}></i>
-                            </div>
-                        </ListGroupItem>
-                    )
-                })}
+                {ingredients.map(ingredient => <Ingredient ingredient={ingredient} onDelete={handleDelete} onEdit={handleEdit} key={ingredient.id}/>)}
             </ListGroup>
         </div>
     );

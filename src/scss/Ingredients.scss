@@ -24,36 +24,4 @@
       text-shadow: 0 5px 6px rgba(0,0,0,.4);
     }
   }
-
-  .ingredient-list {
-
-    .ingredient-card {
-      min-width: 70%;
-      display: flex;
-      flex-direction: column;
-      margin: 0 auto;
-
-      .ingredient-name {
-        margin-bottom: .5rem;
-      }
-
-      &:last-child {
-        margin-bottom: 3rem;
-      }
-
-      .ingredient-info {
-        margin: .1rem auto;
-      }
-
-      .fa {
-        margin: .5rem .3rem 0;
-        font-size: 1.3rem;
-        color: #FFD700;
-      }
-
-      .fa-trash {
-        color: #DC143C;
-      }
-    }
-  }
 }
