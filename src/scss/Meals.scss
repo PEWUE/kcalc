@@ -1,0 +1,27 @@
+.meals {
+  text-align: center;
+  font-family: "Lato", sans-serif;
+
+  .meals-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+
+    .toggle-button {
+      box-shadow: 0 5px 6px rgba(0,0,0,.4);
+      .fa {
+        margin-right: .3rem;
+      }
+
+      .fa-angle-double-up {
+        font-size: 1.2rem;
+      }
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-shadow: 0 5px 6px rgba(0,0,0,.4);
+    }
+  }
+}

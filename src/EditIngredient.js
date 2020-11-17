@@ -65,7 +65,7 @@ const EditIngredient = ({ingredient, onEditIngredient}) => {
                                type="number"
                                name="kcal"
                                id="kcal"
-                               onChange={e => setKcal(parseInt(e.target.value))}/>
+                               onChange={e => setKcal(parseFloat(e.target.value))}/>
                     </Col>
                 </FormGroup>
                 <FormGroup className="row-label-input" row>
@@ -80,7 +80,7 @@ const EditIngredient = ({ingredient, onEditIngredient}) => {
                                type="number"
                                name="fat"
                                id="fat"
-                               onChange={e => setFat(parseInt(e.target.value))}/>
+                               onChange={e => setFat(parseFloat(e.target.value))}/>
                     </Col>
                 </FormGroup>
                 <FormGroup className="row-label-input" row>
@@ -95,7 +95,7 @@ const EditIngredient = ({ingredient, onEditIngredient}) => {
                                type="number"
                                name="carbs"
                                id="carbs"
-                               onChange={e => setCarbs(parseInt(e.target.value))}/>
+                               onChange={e => setCarbs(parseFloat(e.target.value))}/>
                     </Col>
                 </FormGroup>
                 <FormGroup className="row-label-input" row>
@@ -110,7 +110,7 @@ const EditIngredient = ({ingredient, onEditIngredient}) => {
                                type="number"
                                name="protein"
                                id="protein"
-                               onChange={e => setProtein(parseInt(e.target.value))}/>
+                               onChange={e => setProtein(parseFloat(e.target.value))}/>
                     </Col>
                 </FormGroup>
                 <Col xs={{offset: 7}}>

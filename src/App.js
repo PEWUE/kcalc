@@ -6,6 +6,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import './scss/App.scss';
 import Header from "./Header";
 import Ingredients from "./Ingredients";
+import Meals from "./Meals";
 
 function App() {
 
@@ -13,7 +14,8 @@ function App() {
   return (
     <>
       <Header/>
-      <Ingredients/>
+      {/*<Ingredients/>*/}
+      <Meals/>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {db} from "./firebase";
-import {Button, ListGroup, Alert} from "reactstrap";
+import {Button, ListGroup} from "reactstrap";
 import AddNewIngredient from "./AddNewIngredient";
 import Ingredient from "./Ingredient";
 import {toast} from "react-toastify";
@@ -67,7 +67,7 @@ const Ingredients = () => {
                     <Button className="toggle-button" onClick={() => setAddButtonToggle(prevState => !prevState)} color="danger"><i className="fa fa-angle-double-up"></i>Zwiń formularz</Button>}
             </div>
             {addButtonToggle && <AddNewIngredient onAddIngredient={handleAdd}/>}
-            <ListGroup className="ingredient-list">
+            <ListGroup className="ingredients-list">
                 {ingredients.map(ingredient => <Ingredient ingredient={ingredient} onDelete={handleDelete} onEdit={handleEdit} key={ingredient.id}/>)}
             </ListGroup>
         </div>
